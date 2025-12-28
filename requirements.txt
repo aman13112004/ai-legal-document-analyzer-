@@ -1,0 +1,9 @@
+flask
+transformers
+torch
+sentence-transformers
+faiss-cpu
+spacy
+nltk
+pdfplumber
+python-docx

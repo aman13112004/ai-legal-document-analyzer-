@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Legal Case Analysis Report</h1>
+
+    <div class="section">
+        <h2>Case Overview</h2>
+        <div class="summary-box">{{ summary }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Key Facts Identified</h2>
+        <ul>
+            {% for fact in facts %}
+                <li>{{ fact }}</li>
+            {% else %}
+                <li>No facts extracted.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Legal Arguments</h2>
+        <ul>
+            {% for arg in arguments %}
+                <li>{{ arg }}</li>
+            {% else %}
+                <li>No arguments detected.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Referenced Precedents</h2>
+        <ul>
+            {% for p in precedents %}
+                <li>{{ p }}</li>
+            {% else %}
+                <li>No precedents detected.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>System Analysis Summary</h2>
+        <div class="summary-box">{{ analysis_note }}</div>
+    </div>
+
+    <a href="/" class="back-link">← Analyze another case</a>
+</div>
+
+</body>
+</html>
