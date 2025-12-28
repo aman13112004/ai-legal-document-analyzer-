@@ -1,58 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Case Analysis Result</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - AI Legal Document Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
 
-<div class="container">
-    <h1>Legal Case Analysis Report</h1>
-
-    <div class="section">
-        <h2>Case Overview</h2>
-        <div class="summary-box">{{ summary }}</div>
+<div class="page-wrapper">
+    <div class="header">
+        <h1>Analysis Complete</h1>
+        <p class="subtitle">Comprehensive Legal Document Analysis Report</p>
     </div>
 
-    <div class="section">
-        <h2>Key Facts Identified</h2>
-        <ul>
-            {% for fact in facts %}
-                <li>{{ fact }}</li>
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">{{ arguments|length }}</span>
+                <span class="stat-label">Legal Arguments</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ facts|length }}</span>
+                <span class="stat-label">Key Facts</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ precedents|length }}</span>
+                <span class="stat-label">Precedents</span>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 1">
+            <h2>📋 Executive Summary</h2>
+            <div class="summary-box">{{ summary }}</div>
+        </div>
+
+        <div class="section" style="--delay: 2">
+            <h2>🔍 Key Facts Identified</h2>
+            {% if facts %}
+                <ul>
+                    {% for fact in facts %}
+                        <li>{{ fact }}</li>
+                    {% endfor %}
+                </ul>
             {% else %}
-                <li>No facts extracted.</li>
-            {% endfor %}
-        </ul>
-    </div>
+                <div class="empty-state">No facts were extracted from the document.</div>
+            {% endif %}
+        </div>
 
-    <div class="section">
-        <h2>Legal Arguments</h2>
-        <ul>
-            {% for arg in arguments %}
-                <li>{{ arg }}</li>
+        <div class="section" style="--delay: 3">
+            <h2>⚖️ Legal Arguments</h2>
+            {% if arguments %}
+                <ul>
+                    {% for arg in arguments %}
+                        <li>{{ arg }}</li>
+                    {% endfor %}
+                </ul>
             {% else %}
-                <li>No arguments detected.</li>
-            {% endfor %}
-        </ul>
-    </div>
+                <div class="empty-state">No legal arguments were detected in the document.</div>
+            {% endif %}
+        </div>
 
-    <div class="section">
-        <h2>Referenced Precedents</h2>
-        <ul>
-            {% for p in precedents %}
-                <li>{{ p }}</li>
+        <div class="section" style="--delay: 4">
+            <h2>📚 Referenced Precedents</h2>
+            {% if precedents %}
+                <ul>
+                    {% for p in precedents %}
+                        <li>
+                            <span class="badge badge-primary">Case</span>
+                            <strong>{{ p }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% else %}
-                <li>No precedents detected.</li>
-            {% endfor %}
-        </ul>
-    </div>
+                <div class="empty-state">No case precedents were detected in the document.</div>
+            {% endif %}
+        </div>
 
-    <div class="section">
-        <h2>System Analysis Summary</h2>
-        <div class="summary-box">{{ analysis_note }}</div>
-    </div>
+        <div class="section" style="--delay: 5">
+            <h2>🤖 AI Analysis Insights</h2>
+            <div class="summary-box">{{ analysis_note }}</div>
+        </div>
 
-    <a href="/" class="back-link">← Analyze another case</a>
+        <div style="text-align: center;">
+            <a href="/" class="back-link">← Analyze Another Document</a>
+        </div>
+    </div>
 </div>
 
 </body>
